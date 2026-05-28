@@ -23,23 +23,49 @@
     .titulo {
       color: #f5c842;
       font-size: 2rem;
-      font-style: italic;
+      font-family: "Courier New", Courier, monospace;
+      font-style: Century;
       letter-spacing: 0.1em;
       margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeIn 1s ease 0.5s forwards;
+      animation: fadeIn 1s ease 0.5s both;
       text-shadow: 0 0 20px rgba(245, 200, 66, 0.4);
+    }
+
+    .flor-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
     }
 
     .flor-container {
       position: relative;
       width: 300px;
       height: 300px;
-      animation: fadeIn 1s ease 0.2s forwards;
-      opacity: 0;
+      animation: fadeIn 1s ease 0.2s both;
+      transform-origin: center center;
     }
 
-    /* Pétalos */
+    /* Grupo de pétalos que gira */
+    .petalos-grupo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-origin: center center;
+    }
+
+    .flor-container:hover .petalos-grupo {
+      animation: girar 2s linear infinite;
+    }
+
+    /* Sacudida al click */
+    .flor-container.sacudir .petalos-grupo {
+      animation: sacudir 0.5s ease forwards;
+    }
+
     .petalo {
       position: absolute;
       width: 60px;
@@ -54,8 +80,7 @@
       box-shadow: inset 2px 0 8px rgba(0,0,0,0.15);
     }
 
-    /* 16 pétalos distribuidos */
-    .p1  { transform: rotate(0deg)   translateY(-0px); }
+    .p1  { transform: rotate(0deg); }
     .p2  { transform: rotate(22.5deg); }
     .p3  { transform: rotate(45deg); }
     .p4  { transform: rotate(67.5deg); }
@@ -72,7 +97,6 @@
     .p15 { transform: rotate(315deg); }
     .p16 { transform: rotate(337.5deg); }
 
-    /* Centro */
     .centro {
       position: absolute;
       width: 110px;
@@ -82,14 +106,10 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      box-shadow:
-        0 0 0 6px #3d1f00,
-        0 0 30px rgba(90, 45, 0, 0.6),
-        inset 0 4px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 6px #3d1f00, 0 0 30px rgba(90,45,0,0.6), inset 0 4px 12px rgba(0,0,0,0.5);
       z-index: 10;
     }
 
-    /* Patrón de semillas (puntos) */
     .semillas {
       position: absolute;
       width: 90px;
@@ -105,7 +125,6 @@
       background-position: 0 0, 6px 6px;
     }
 
-    /* Tallo */
     .tallo {
       width: 12px;
       height: 130px;
@@ -113,11 +132,9 @@
       border-radius: 6px;
       margin-top: 10px;
       position: relative;
-      animation: fadeIn 1s ease 0.2s forwards;
-      opacity: 0;
+      animation: fadeIn 1s ease 0.2s both;
     }
 
-    /* Hoja */
     .hoja {
       position: absolute;
       width: 55px;
@@ -136,57 +153,87 @@
       top: 60px;
     }
 
-    /* Animación girar suave */
-    .flor-container {
-      animation: fadeIn 1s ease 0.2s forwards, girar 10s ease-in-out infinite;
-    }
-
-    @keyframes girar {
-      0%   { transform: rotate(-2deg); }
-      50%  { transform: rotate(2deg); }
-      100% { transform: rotate(-2deg); }
+    .hint {
+      color: rgba(245, 200, 66, 0.4);
+      font-size: 0.85rem;
+      margin-top: 30px;
+      font-style: italic;
+      animation: fadeIn 1s ease 1.5s both;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.85); }
       to   { opacity: 1; transform: scale(1); }
     }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes sacudir {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(-18deg); }
+      30%  { transform: rotate(16deg); }
+      45%  { transform: rotate(-12deg); }
+      60%  { transform: rotate(10deg); }
+      75%  { transform: rotate(-5deg); }
+      90%  { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
   </style>
 </head>
 <body>
 
-  <p class="titulo">🌻 Girasol</p>
+  <p class="titulo">🌻 Feliz Cumpleaños Andrea :)</p>
 
-  <div class="flor-container">
-    <!-- Pétalos -->
-    <div class="petalo p1"></div>
-    <div class="petalo p2"></div>
-    <div class="petalo p3"></div>
-    <div class="petalo p4"></div>
-    <div class="petalo p5"></div>
-    <div class="petalo p6"></div>
-    <div class="petalo p7"></div>
-    <div class="petalo p8"></div>
-    <div class="petalo p9"></div>
-    <div class="petalo p10"></div>
-    <div class="petalo p11"></div>
-    <div class="petalo p12"></div>
-    <div class="petalo p13"></div>
-    <div class="petalo p14"></div>
-    <div class="petalo p15"></div>
-    <div class="petalo p16"></div>
-
-    <!-- Centro con semillas -->
-    <div class="centro">
-      <div class="semillas"></div>
+  <div class="flor-wrapper">
+    <div class="flor-container" id="flor">
+      <div class="petalos-grupo">
+        <div class="petalo p1"></div>
+        <div class="petalo p2"></div>
+        <div class="petalo p3"></div>
+        <div class="petalo p4"></div>
+        <div class="petalo p5"></div>
+        <div class="petalo p6"></div>
+        <div class="petalo p7"></div>
+        <div class="petalo p8"></div>
+        <div class="petalo p9"></div>
+        <div class="petalo p10"></div>
+        <div class="petalo p11"></div>
+        <div class="petalo p12"></div>
+        <div class="petalo p13"></div>
+        <div class="petalo p14"></div>
+        <div class="petalo p15"></div>
+        <div class="petalo p16"></div>
+      </div>
+      <div class="centro">
+        <div class="semillas"></div>
+      </div>
+    </div>
+    <div class="tallo">
+      <div class="hoja"></div>
+      <div class="hoja derecha"></div>
     </div>
   </div>
 
-  <!-- Tallo y hojas -->
-  <div class="tallo">
-    <div class="hoja"></div>
-    <div class="hoja derecha"></div>
-  </div>
+  <p class="hint">pásame el mouse 🌻</p>
+
+  <script>
+    const flor = document.getElementById('flor');
+
+    flor.addEventListener('click', () => {
+      flor.classList.remove('sacudir');
+      void flor.offsetWidth;
+      flor.classList.add('sacudir');
+    });
+
+    flor.addEventListener('animationend', (e) => {
+      if (e.animationName === 'sacudir') {
+        flor.classList.remove('sacudir');
+      }
+    });
+  </script>
 
 </body>
 </html>
