@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Girasol</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: radial-gradient(ellipse at center, #1a3a1a 0%, #0a1a0a 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .titulo {
+      color: #f5c842;
+      font-size: 2rem;
+      font-style: italic;
+      letter-spacing: 0.1em;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+      text-shadow: 0 0 20px rgba(245, 200, 66, 0.4);
+    }
+
+    .flor-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      animation: fadeIn 1s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    /* Pétalos */
+    .petalo {
+      position: absolute;
+      width: 60px;
+      height: 120px;
+      background: linear-gradient(180deg, #f5c842 0%, #e8a020 60%, #c47a10 100%);
+      border-radius: 50% 50% 40% 40%;
+      top: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      margin-left: -30px;
+      margin-top: -120px;
+      box-shadow: inset 2px 0 8px rgba(0,0,0,0.15);
+    }
+
+    /* 16 pétalos distribuidos */
+    .p1  { transform: rotate(0deg)   translateY(-0px); }
+    .p2  { transform: rotate(22.5deg); }
+    .p3  { transform: rotate(45deg); }
+    .p4  { transform: rotate(67.5deg); }
+    .p5  { transform: rotate(90deg); }
+    .p6  { transform: rotate(112.5deg); }
+    .p7  { transform: rotate(135deg); }
+    .p8  { transform: rotate(157.5deg); }
+    .p9  { transform: rotate(180deg); }
+    .p10 { transform: rotate(202.5deg); }
+    .p11 { transform: rotate(225deg); }
+    .p12 { transform: rotate(247.5deg); }
+    .p13 { transform: rotate(270deg); }
+    .p14 { transform: rotate(292.5deg); }
+    .p15 { transform: rotate(315deg); }
+    .p16 { transform: rotate(337.5deg); }
+
+    /* Centro */
+    .centro {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle at 40% 35%, #5a2d00 0%, #2e1500 60%, #1a0a00 100%);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 6px #3d1f00,
+        0 0 30px rgba(90, 45, 0, 0.6),
+        inset 0 4px 12px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    /* Patrón de semillas (puntos) */
+    .semillas {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-image:
+        radial-gradient(circle, #7a4010 1.5px, transparent 1.5px),
+        radial-gradient(circle, #7a4010 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      background-position: 0 0, 6px 6px;
+    }
+
+    /* Tallo */
+    .tallo {
+      width: 12px;
+      height: 130px;
+      background: linear-gradient(90deg, #2d6a1f 0%, #4a9a30 50%, #2d6a1f 100%);
+      border-radius: 6px;
+      margin-top: 10px;
+      position: relative;
+      animation: fadeIn 1s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    /* Hoja */
+    .hoja {
+      position: absolute;
+      width: 55px;
+      height: 30px;
+      background: linear-gradient(135deg, #3d8a28 0%, #5ab835 50%, #2d6a1f 100%);
+      border-radius: 0 80% 0 80%;
+      top: 30px;
+      left: 6px;
+      transform: rotate(-30deg);
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .hoja.derecha {
+      left: -49px;
+      transform: rotate(210deg) scaleX(-1);
+      top: 60px;
+    }
+
+    /* Animación girar suave */
+    .flor-container {
+      animation: fadeIn 1s ease 0.2s forwards, girar 10s ease-in-out infinite;
+    }
+
+    @keyframes girar {
+      0%   { transform: rotate(-2deg); }
+      50%  { transform: rotate(2deg); }
+      100% { transform: rotate(-2deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <p class="titulo">🌻 Girasol</p>
+
+  <div class="flor-container">
+    <!-- Pétalos -->
+    <div class="petalo p1"></div>
+    <div class="petalo p2"></div>
+    <div class="petalo p3"></div>
+    <div class="petalo p4"></div>
+    <div class="petalo p5"></div>
+    <div class="petalo p6"></div>
+    <div class="petalo p7"></div>
+    <div class="petalo p8"></div>
+    <div class="petalo p9"></div>
+    <div class="petalo p10"></div>
+    <div class="petalo p11"></div>
+    <div class="petalo p12"></div>
+    <div class="petalo p13"></div>
+    <div class="petalo p14"></div>
+    <div class="petalo p15"></div>
+    <div class="petalo p16"></div>
+
+    <!-- Centro con semillas -->
+    <div class="centro">
+      <div class="semillas"></div>
+    </div>
+  </div>
+
+  <!-- Tallo y hojas -->
+  <div class="tallo">
+    <div class="hoja"></div>
+    <div class="hoja derecha"></div>
+  </div>
+
+</body>
+</html>
